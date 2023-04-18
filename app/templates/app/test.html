@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for number in numbers %}
-    <li><a href="/app/{{ number }} ">{{ number|title }}</a></li>
-{% endfor %}
-</body>
-</html>
+{%  extends 'base.html' %}
+
+{% block title %} Title {% endblock %}
+
+{% block content %}
+    <h2>Coins</h2>
+    <ul>
+    {% for number in numbers %}
+        <li><a href="{% url "info" info=number %} ">{{ number|title }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
