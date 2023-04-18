@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for number in numbers %}
+    <li><a href="/app/{{ number }} ">{{ number|title }}</a></li>
+{% endfor %}
+</body>
+</html>

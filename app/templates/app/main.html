@@ -1,4 +1,4 @@
-{%  extends 'birzha_app/base.html' %}
+{%  extends 'app/base.html' %}
 
 {% block title %} Birzha Info {% endblock %}
 
@@ -6,7 +6,7 @@
     <h2>Coins</h2>
     <ul>
     {% for coin in coins %}
-        <li><pre><a href="{{ coin.get_url }}">{{ coin.coin_name }}</a> - {{ coin.marketplace }} (<small><a href ="marketplaces{{ marketplace.get_url }}">to all</a></small>)</pre></li>
+        <li><pre><a href=""> </a>)</pre></li>
      {% endfor %}
     </ul>
 

@@ -1,10 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
+from dataclasses import dataclass
 
 def name(request):
     return HttpResponse("123")
 
+@dataclass
+class Person:
+    name:str
+    age:int
+
+    def __str__(self):
+        return f'This is {self.name}'
 
 
 info_dict = {
@@ -16,24 +25,20 @@ info_dict = {
 }
 
 def hello(request):
-    num = list(info_dict)
-    li=''
-    for i in num:
-        redirect_url = reverse('info',args=[i])
-        li += f"<li><a href= '{redirect_url}'> {i} </a> </li>"
-    res = f"""
-    <ol>
-        {li}
-    </ol>
-    """
-    return HttpResponse(res)
+    numbers = list(info_dict)
+    context = {
+        'numbers':numbers
+    }
+    return render(request,'app/test.html',context=context)
 
 def get_info(request,info:str):
-    description = info_dict.get(info,None)
-    if description:
-        return HttpResponse(description)
-    else:
-        return HttpResponseNotFound("NOT FOUND))))))!")
+    description = info_dict.get(info)
+    data = {
+        'description':description,
+        'name':info,
+        'class':Person('Will',12)
+    }
+    return render(request,'app/info.html',context=data)
 
 def number(request, num:int):
     numbers = list(info_dict)
