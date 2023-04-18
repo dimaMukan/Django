@@ -3,7 +3,7 @@
 {% block title %} Title {% endblock %}
 
 {% block content %}
-    <h2>Coins</h2>
+    {%  include 'app/navbar.html' %}
     <ul>
     {% for number in numbers %}
         <li><a href="{% url "info" info=number %} ">{{ number|title }}</a></li>

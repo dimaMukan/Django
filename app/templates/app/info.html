@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Number - {{ name }}</title>
-</head>
-<body>
-<h1>Number - {{ name }}</h1>
-<h1>{{ description }}</h1>
-</body>
-</html>
+{%  extends 'base.html' %}
+
+{% block title %} Number - {{ name }} {% endblock %}
+
+{% block content %}
+    {%  include 'app/navbar.html' %}
+    <h1>Number - {{ name }}</h1>
+    <h1>{{ description }}</h1>
+{% endblock %}

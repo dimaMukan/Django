@@ -38,7 +38,7 @@ def get_info(request,info:str):
         'name':info,
         'class':Person('Will',12)
     }
-    return render(request,'base.html',context=data)
+    return render(request,'app/info.html',context=data)
 
 def number(request, num:int):
     numbers = list(info_dict)
