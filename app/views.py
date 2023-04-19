@@ -34,12 +34,16 @@ def name(request):
 
 def get_info(request):
     movies = Movie.objects.all()
+
+    for movie in movies:
+        movie.save()
+
     return render(request,'app/info.html',{
         'movies':movies
     })
 
-def get_info_about_one(request,id_movie:int):
-    movie = get_object_or_404(Movie,id=id_movie)
+def get_info_about_one(request,slug_movie:str):
+    movie = get_object_or_404(Movie,slug=slug_movie)
     return render(request,'app/info_one.html',{
         'movie':movie
     })
