@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from dataclasses import dataclass
+from .models import Movie
 
 def name(request):
     return HttpResponse("123")
@@ -24,26 +25,30 @@ info_dict = {
     "five":"FIVE!",
 }
 
-def hello(request):
-    numbers = list(info_dict)
-    context = {
-        'numbers':numbers
-    }
-    return render(request,'app/test.html',context=context)
+# def hello(request):
+#     numbers = list(info_dict)
+#     context = {
+#         'numbers':numbers
+#     }
+#     return render(request,'app/test.html',context=context)
 
-def get_info(request,info:str):
-    description = info_dict.get(info)
-    data = {
-        'description':description,
-        'name':info,
-        'class':Person('Will',12)
-    }
-    return render(request,'app/info.html',context=data)
+def get_info(request):
+    movies = Movie.objects.all()
+    return render(request,'app/info.html',{
+        'movies':movies
+    })
 
-def number(request, num:int):
-    numbers = list(info_dict)
-    if num > len(numbers):
-        return HttpResponseNotFound(f"NOT FOUND! - {num}")
-    res = numbers[num - 1]
-    a = reverse('info',args=(res,))
-    return HttpResponseRedirect(a)
+def get_info_about_one(request,id_movie:int):
+    movies = Movie.objects.all()
+    return render(request,'app/info.html',{
+        'movies':movies
+    })
+
+#
+# def number(request, num:int):
+#     numbers = list(info_dict)
+#     if num > len(numbers):
+#         return HttpResponseNotFound(f"NOT FOUND! - {num}")
+#     res = numbers[num - 1]
+#     a = reverse('info',args=(res,))
+#     return HttpResponseRedirect(a)
