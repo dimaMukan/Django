@@ -1,10 +1,9 @@
 {%  extends 'base.html' %}
 
-{% block title %} Number - {{ name }} {% endblock %}
+{% block title %}Movie - {{ movie.name }}{% endblock %}
 
 {% block content %}
     {%  include 'app/navbar.html' %}
-    {% for movie in movies %}
-        <li>{{ movie }}</li>
-    {% endfor %}
+    <h3>name - {{ movie.name }}</h3>
+    <h3>rating - {{ movie.rating }}</h3>
 {% endblock %}
