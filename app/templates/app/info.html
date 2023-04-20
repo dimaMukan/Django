@@ -7,4 +7,5 @@
     {% for movie in movies %}
         <li><a href="{{ movie.get_url }}">{{ movie.name }}</a></li>
     {% endfor %}
+    <h3>{{ agg }}</h3>
 {% endblock %}

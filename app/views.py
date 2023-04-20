@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from dataclasses import dataclass
 from .models import Movie
+from django.db.models import Sum,Max,Min,Count
 
 def name(request):
     return HttpResponse("123")
@@ -33,13 +34,14 @@ def name(request):
 # #     return render(request,'app/test.html',context=context)
 
 def get_info(request):
-    movies = Movie.objects.all()
-
+    movies = Movie.objects.order_by("-rating")
+    agg = movies.aggregate(Sum('rating'))
     for movie in movies:
         movie.save()
 
     return render(request,'app/info.html',{
-        'movies':movies
+        'movies':movies,
+        'agg':agg,
     })
 
 def get_info_about_one(request,slug_movie:str):
