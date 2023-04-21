@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-# from app.views import name
+
+admin.site.site_header = 'Our admin'
+admin.site.index_title = 'Super admin'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
