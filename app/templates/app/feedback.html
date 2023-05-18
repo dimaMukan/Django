@@ -1,0 +1,21 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block title %} Feedback {% endblock %}
+
+{% block content %}
+{%  include 'app/navbar.html' %}
+<form method="post">
+    {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'css/feedback/feedback.css' %}">
+    {% for i in form %}
+        <div class="form-style {% if field.errors %} errors {% endif %}">
+        {{ i.label_tag }}
+        {{ i.errors }}
+        {{ i }}
+        </div>
+    {% endfor %}
+    <button type="submit">Succeed</button>
+
+</form>
+{% endblock %}

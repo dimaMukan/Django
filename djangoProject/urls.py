@@ -6,6 +6,6 @@ admin.site.index_title = 'Super admin'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("app/", include("app.urls")),
+    path("", include("app.urls")),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

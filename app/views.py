@@ -3,58 +3,51 @@ from django.http import HttpResponse,HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from dataclasses import dataclass
-from .models import Movie
+# from .models import Movie
 from django.db.models import Sum,Max,Min,Count
+from .forms import FeedbackForm
+from .models import Feedback
 
-def name(request):
-    return HttpResponse("123")
-#
-# @dataclass
-# class Person:
-#     name:str
-#     age:int
-#
-#     def __str__(self):
-#         return f'This is {self.name}'
-#
-#
-# info_dict = {
-#     "one":"ONE!",
-#     "two":"TWO!",
-#     "three":"THREE!",
-#     "four":"FOUR!",
-#     "five":"FIVE!",
-# }
-#
-# # def hello(request):
-# #     numbers = list(info_dict)
-# #     context = {
-# #         'numbers':numbers
-# #     }
-# #     return render(request,'app/test.html',context=context)
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            feed = Feedback(
+                name=form.cleaned_data['name'],
+                surname=form.cleaned_data['surname'],
+                feedback=form.cleaned_data['feedback'],
+                rating=form.cleaned_data['rating'],
+            )
+            feed.save()
+            return HttpResponseRedirect('/done')
+    else:
+        form = FeedbackForm()
+    return render(request, 'app/feedback.html',context={'form':form})
 
-def get_info(request):
-    movies = Movie.objects.order_by("-rating")
-    agg = movies.aggregate(Sum('rating'))
-    for movie in movies:
-        movie.save()
 
-    return render(request,'app/info.html',{
-        'movies':movies,
-        'agg':agg,
-    })
+def products(request):
+    return render(request, 'app/products.html')
 
-def get_info_about_one(request,slug_movie:str):
-    movie = get_object_or_404(Movie,slug=slug_movie)
-    return render(request,'app/info_one.html',{
-        'movie':movie
-    })
+def food(request):
+    return render(request, 'app/food.html')
 
+def home(request):
+    return render(request, 'app/home.html')
+
+# # def get_info(request):
+# #     movies = Movie.objects.order_by("-rating")
+# #     agg = movies.aggregate(Sum('rating'))
+# #     for movie in movies:
+# #         movie.save()
+# #
+# #     return render(request,'app/info.html',{
+# #         'movies':movies,
+# #         'agg':agg,
+# #     })
 #
-# def number(request, num:int):
-#     numbers = list(info_dict)
-#     if num > len(numbers):
-#         return HttpResponseNotFound(f"NOT FOUND! - {num}")
-#     res = numbers[num - 1]
-#     a = reverse('info',args=(res,))
-#     return HttpResponseRedirect(a)
+# def get_info_about_one(request,slug_movie:str):
+#     movie = get_object_or_404(Movie,slug=slug_movie)
+#     return render(request,'app/info_one.html',{
+#         'movie':movie
+#     })
