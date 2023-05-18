@@ -10,7 +10,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-{# <img src="{% static 'images/logo.png' %}">#}
+ <images src="{% static 'images/logo.png' %}"></images>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,7 +26,7 @@
         <a class="nav-link" href="{% url 'food' %}">Food</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="{% url 'home' %}">Settings</a>
+        <a class="nav-link" href="{% url 'account' %}">Settings</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
@@ -36,7 +36,7 @@
     </ul>
   </div>
 
-{#  <span class="hello-msg">Hello, {{request.user}}</span>#}
-{#  <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>#}
+  <span class="hello-msg">Hello, {{request.user}}</span>
+  <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
 
 </nav>
