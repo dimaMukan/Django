@@ -6,5 +6,6 @@ urlpatterns = [
     path("feedback", views.feedback, name='feedback'),
     path("products", views.products, name='products'),
     path("food", views.food, name='food'),
+    path("thx", views.thx, name='thx'),
 
 ]

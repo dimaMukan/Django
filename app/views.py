@@ -20,11 +20,13 @@ def feedback(request):
                 rating=form.cleaned_data['rating'],
             )
             feed.save()
-            return HttpResponseRedirect('/done')
+            return HttpResponseRedirect('/thx')
     else:
         form = FeedbackForm()
     return render(request, 'app/feedback.html',context={'form':form})
 
+def thx(request):
+    return render(request, 'app/thx.html')
 
 def products(request):
     return render(request, 'app/products.html')
