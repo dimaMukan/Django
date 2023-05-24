@@ -11,6 +11,7 @@ from .forms import CreateUserForm, CustomerForm
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import UserCreationForm
 
 def feedback(request):
     if request.method == 'POST':
@@ -42,23 +43,23 @@ def home(request):
 
 
 def registerPage(request):
-    form = CreateUserForm()
+    form = UserCreationForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-
-            Customer.objects.create(
-                user=user,
-                name=user.username,
-            )
-            messages.success(request, 'Account was created for ' + username)
-
-            return redirect('login')
+    #         username = form.cleaned_data.get('username')
+    #
+    #         group = Group.objects.get(name='customer')
+    #         user.groups.add(group)
+    #
+    #         Customer.objects.create(
+    #             user=user,
+    #             name=user.username,
+    #         )
+    #         messages.success(request, 'Account was created for ' + username)
+    #
+    #         return redirect('login')
 
     context = {'form': form}
     return render(request, 'app/register.html', context)

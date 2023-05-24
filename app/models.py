@@ -22,3 +22,21 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+class User1(models.Model):
+    def __str__(self):
+        return self.name
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    city = models.CharField(max_length=100,null=True,blank=True)
+    e_mail = models.EmailField(null=True,blank=True)
+    password = models.CharField(max_length=100,null=True,blank=True)
+    slug = models.SlugField(default='',db_index=True)
+
+    # def save(self,*args,**kwargs):
+    #     self.slug = slugify(self.name)
+    #     super(User,self).save(*args,**kwargs)
+
+    def get_url(self):
+        return reverse('user-info', args=[self.slug])
